@@ -17,7 +17,7 @@
     //paths
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     },
     /* Linting */
     "strict": true,
