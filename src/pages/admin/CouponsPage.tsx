@@ -12,12 +12,15 @@ import { Coupon } from "@/types/coupon";
 import { CouponForm } from "@/components/forms/coupon";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useExport } from "@/hooks/useExport";
+import { useAuth } from "@/services/auth";
 
 export function CouponsPage() {
   const [search, setSearch] = useState("");
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
+
+  const { user : currentUser } = useAuth();
 
   const { coupons, createCoupon, updateCoupon, deleteCoupon } = useCoupons();
   const { exportCoupons } = useExport();
@@ -203,7 +206,7 @@ export function CouponsPage() {
         <DialogContent className="sm:max-w-[425px]">
           <CouponForm
             onSubmit={async (values) => {
-              await createCoupon.mutateAsync({...values, createdBy: currentUser?.data.id});
+              await createCoupon.mutateAsync({...values, createdBy: currentUser?.id ? currentUser.id : ''});
               setIsCreateDialogOpen(false);
             }}
             onCancel={() => setIsCreateDialogOpen(false)}

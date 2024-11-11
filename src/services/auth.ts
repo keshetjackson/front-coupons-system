@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { withDelay } from '@/lib/reactQuery';
 import type { LoginInput } from '@/types/auth';
-import { User } from '@/types/auth';
+import { User } from '@/types/user';
 
 const API_URL = import.meta.env.API_URL || 'http://localhost:3001';
 
@@ -79,7 +79,7 @@ export function useAuth() {
   };
 }
 
-// Optional: Helper hook for protected routes
+
 export function useRequireAuth() {
   const { isAuthenticated, isLoading, user } = useAuth();
   
