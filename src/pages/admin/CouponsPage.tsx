@@ -11,6 +11,7 @@ import { useCoupons } from "@/hooks/coupons/useCoupons";
 import { Coupon } from "@/types/coupon";
 import { CouponForm } from "@/components/forms/coupon";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useExport } from "@/hooks/useExport";
 
 export function CouponsPage() {
   const [search, setSearch] = useState("");
@@ -19,6 +20,8 @@ export function CouponsPage() {
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
 
   const { coupons, createCoupon, updateCoupon, deleteCoupon } = useCoupons();
+  const { exportCoupons } = useExport();
+
 
   const filteredCoupons =
     coupons.data?.filter(
@@ -28,7 +31,7 @@ export function CouponsPage() {
     ) ?? [];
 
   const handleExport = async () => {
-    console.log("Exporting coupons...");
+    await exportCoupons.mutateAsync();
   };
 
   const handleEdit = (coupon: Coupon) => {
@@ -49,6 +52,7 @@ export function CouponsPage() {
           <Button
             onClick={handleExport}
           >
+            Export Coupons 
           </Button>
           <Button onClick={() => setIsCreateDialogOpen(true)}>
             <Plus className="w-4 h-4 mr-2" />
