@@ -34,13 +34,6 @@ export const couponService = {
         }))
     ),
 
-/*************  ✨ Codeium Command ⭐  *************/
-  /**
-   * Creates a new coupon.
-   * @param data The coupon data.
-   * @returns A promise that resolves to an ApiResponse object containing the created coupon.
-   */
-/******  4655fae5-9fc8-4d69-b9bd-cb598918fe95  *******/
   create: (data: CouponInput): Promise<ApiResponse<Coupon>> =>
     withDelay(
       fetch(`${API_URL}/coupons`, {
