@@ -1,50 +1,62 @@
-# React + TypeScript + Vite
+# Coupon System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend application for managing a coupon system, built as per assignment requirements.
 
-Currently, two official plugins are available:
+## Core Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Anonymous coupon application system with support for multiple coupons
+- Admin panel for coupon management and reporting
+- Secure authentication system for admin users
+-  coupon validation including stacking rules and usage limits
 
-## Expanding the ESLint configuration
+## Technical Highlights
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Architecture & Performance
+- Used React Query for efficient server state management, eliminating need for global contexts
+- Implemented optimistic updates for better UX in coupon management
+- Applied proper TypeScript typings throughout for type safety
 
-- Configure the top-level `parserOptions` property like this:
+### Security & Validation
+- Implemented complete auth flow with protected routes
+- Added comprehensive coupon validation logic:
+  - Usage limits tracking
+  - Expiration dates
+  - Stacking rules
+  - Multi-coupon validation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### UI/UX Considerations
+- Clean, responsive design using Tailwind CSS and shadcn/ui
+- Immediate feedback on coupon validity
+- Proper loading and error states
+- Intuitive coupon management interface
+
+## Technologies
+- React 18
+- TypeScript
+- TanStack Query for server state
+- Tailwind CSS & shadcn/ui for styling
+- React Router for navigation
+
+### Authentication
+- Used React Query for auth state management instead of Context API
+- Implemented protected routes with auth checks
+- Added user management for admins
+
+### Coupon Management
+- Complete CRUD operations for coupons
+- Real-time validation
+- Support for multiple discount types (percentage/fixed)
+- Flexible stacking rules
+
+### Data Handling
+- Efficient caching with React Query
+- Type-safe API interactions
+- Proper error handling and loading states
+
+
+
+### Test Credentials
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+Username: admin
+Password: admin123
 ```
