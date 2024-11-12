@@ -20,7 +20,7 @@ export function CouponsPage() {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
 
-  const { user : currentUser } = useAuth();
+  const { currentUser } = useAuth();
 
   const { coupons, createCoupon, updateCoupon, deleteCoupon } = useCoupons();
   const { exportCoupons } = useExport();

@@ -42,7 +42,7 @@ export const authService = {
 export function useAuth() {
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery({
+  const { data: currentUser, isLoading } = useQuery({
     queryKey: ['auth', 'user'],
     queryFn: authService.getCurrentUser,
     staleTime: Infinity, // Don't refetch automatically
@@ -69,8 +69,8 @@ export function useAuth() {
   });
 
   return {
-    user,
-    isAuthenticated: !!user,
+    currentUser,
+    isAuthenticated: !!currentUser,
     isLoading,
     login: loginMutation.mutate,
     loginError: loginMutation.error,
@@ -81,12 +81,12 @@ export function useAuth() {
 
 
 export function useRequireAuth() {
-  const { isAuthenticated, isLoading, user } = useAuth();
+  const { isAuthenticated, isLoading, currentUser } = useAuth();
   
   return {
     isLoading,
     isAuthenticated,
-    user,
-    requireAdmin: !!user?.isAdmin,
+    currentUser,
+    requireAdmin: !!currentUser?.isAdmin,
   };
 }
