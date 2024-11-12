@@ -88,7 +88,6 @@ export const couponService = {
   // New methods for coupon application
   validateCoupons: async (codes: string[], orderAmount: number = 100): Promise<ApiResponse<ValidationResult>> => 
     withDelay(
-      // Changed to Promise.all to fetch each coupon individually to ensure we get all of them
       Promise.all(
         codes.map(code => 
           fetch(`${API_URL}/coupons?code=${code}&isActive=true`)
@@ -96,10 +95,8 @@ export const couponService = {
             .then(coupons => coupons[0])
         )
       ).then(async (coupons: Coupon[]) => {
-          // Filter out any undefined values (invalid codes)
           coupons = coupons.filter(Boolean);
   
-          // Check if all coupons exist
           if (coupons.length !== codes.length) {
             return {
               data: {
@@ -111,7 +108,6 @@ export const couponService = {
             };
           }
   
-          // Check for expired coupons
           const expiredCoupon = coupons.find(
             coupon => coupon.expiryDate && new Date(coupon.expiryDate) < new Date()
           );
@@ -126,7 +122,6 @@ export const couponService = {
             };
           }
   
-          // Check usage limits
           const overLimitCoupon = coupons.find(
             coupon => coupon.usageLimit && coupon.currentUsage >= coupon.usageLimit
           );
@@ -154,7 +149,6 @@ export const couponService = {
             };
           }
   
-          // Calculate total discount
           let remainingAmount = orderAmount;
           let totalDiscount = 0;
   
@@ -176,7 +170,6 @@ export const couponService = {
             remainingAmount = Math.max(remainingAmount - discountAmount, 0);
           }
   
-          // Ensure final amount doesn't go below 0
           const finalAmount = Math.max(orderAmount - totalDiscount, 0);
   
           return {
@@ -218,7 +211,6 @@ export const couponService = {
             })
           ));
 
-          // Update usage counts
           await Promise.all(appliedCoupons!.map(coupon =>
             couponService.update(coupon.id, {
               currentUsage: (coupon.currentUsage || 0) + 1

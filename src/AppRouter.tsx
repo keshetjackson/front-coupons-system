@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { MainLayout } from "./components/layouts/mainLayout";
 import { CouponEntryPage } from "./pages/CouponEntryPage";
-import { DashboardPage } from "./pages/admin/DashboardPage";
 import { ReportsPage } from "./pages/admin/ReportsPage";
 import { UsersPage } from "./pages/admin/UsersPage";
 import { CouponsPage } from "./pages/admin/CouponsPage";
@@ -19,7 +18,6 @@ export function AppRouter() {
           <Route path="/coupons/test" element={<CouponEntryPage />} />
 
           <Route element={ <ProtectedRoute/> }>
-            <Route path="/admin" element={<DashboardPage />} />
             <Route path="/admin/coupons" element={<CouponsPage />} />
             <Route path="/admin/reports" element={<ReportsPage />} />
             <Route path="/admin/users" element={<UsersPage />} />
