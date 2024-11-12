@@ -1,25 +1,43 @@
-// src/components/navigation/navbar.tsx
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, LogOut, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/hooks/useAuth';
 
 interface NavItem {
   label: string;
   href: string;
+  adminOnly?: boolean;
 }
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Dashboard', href: '/admin' },
-  { label: 'Manage Coupons', href: '/admin/coupons' },
-  { label: 'Reports', href: '/admin/reports' },
-  { label: 'Users', href: '/admin/users' },
+  { label: 'Dashboard', href: '/admin', adminOnly: true },
+  { label: 'Manage Coupons', href: '/admin/coupons', adminOnly: true },
+  { label: 'Reports', href: '/admin/reports', adminOnly: true },
+  { label: 'Users', href: '/admin/users', adminOnly: true },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { currentUser, isAuthenticated, logout } = useAuth();
+
+  const filteredNavItems = navItems.filter(item => 
+    !item.adminOnly || (item.adminOnly && currentUser?.isAdmin)
+  );
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   const isCurrentPath = (path: string) => {
     if (path === '/') {
@@ -38,7 +56,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            {navItems.map((item) => (
+            {filteredNavItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
@@ -52,9 +70,26 @@ export function Navbar() {
               </Link>
             ))}
 
-            <Button asChild variant="outline">
-              <Link to="/login">Login</Link>
-            </Button>
+            {isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="ml-4">
+                    {currentUser?.username}
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button asChild variant="outline">
+                <Link to="/login">Login</Link>
+              </Button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -78,7 +113,7 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
+            {filteredNavItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
@@ -93,14 +128,28 @@ export function Navbar() {
               </Link>
             ))}
 
-            <Button
-              asChild
-              variant="outline"
-              className="w-full mt-4"
-              onClick={() => setIsOpen(false)}
-            >
-              <Link to="/login">Login</Link>
-            </Button>
+            {isAuthenticated ? (
+              <Button
+                variant="outline"
+                className="w-full mt-4"
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </Button>
+            ) : (
+              <Button
+                asChild
+                variant="outline"
+                className="w-full mt-4"
+                onClick={() => setIsOpen(false)}
+              >
+                <Link to="/login">Login</Link>
+              </Button>
+            )}
           </div>
         </div>
       )}

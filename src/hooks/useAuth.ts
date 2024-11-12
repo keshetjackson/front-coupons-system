@@ -1,13 +1,18 @@
 import { authService } from "@/services/auth";
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useAuth() {
     const queryClient = useQueryClient();
   
-    const { data: currentUser, isLoading } = useSuspenseQuery({
+    // Change from useSuspenseQuery to useQuery
+    const { data: currentUser, isLoading } = useQuery({
       queryKey: ['auth', 'user'],
-      queryFn: authService.getCurrentUser,
-      staleTime: Infinity, // Don't refetch automatically
+      queryFn: async () => {
+        const token = localStorage.getItem('auth_token');
+        if (!token) return null;
+        return authService.getCurrentUser();
+      },
+      staleTime: Infinity,
     });
   
     const loginMutation = useMutation({
@@ -23,32 +28,13 @@ export function useAuth() {
       queryClient.invalidateQueries({ queryKey: ['auth'] });
     };
   
-    const createUserMutation = useMutation({
-      mutationFn: authService.createUser,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['auth'] });
-      },
-    });
-  
     return {
       currentUser,
-      isAuthenticated: !!currentUser,
+      isAuthenticated: !!currentUser && !!localStorage.getItem('auth_token'),
       isLoading,
       login: loginMutation.mutate,
       loginError: loginMutation.error,
       logout,
-      createUser: createUserMutation.mutate,
     };
-  }
-  
-  
-  export function useRequireAuth() {
-    const { isAuthenticated, isLoading, currentUser } = useAuth();
-    
-    return {
-      isLoading,
-      isAuthenticated,
-      currentUser,
-      requireAdmin: !!currentUser?.isAdmin,
-    };
-  }
+}
+
