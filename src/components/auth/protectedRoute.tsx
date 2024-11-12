@@ -1,6 +1,6 @@
+import { useRequireAuth } from '@/hooks/useAuth';
 import { useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useRequireAuth } from '@/services/auth';
 export function ProtectedRoute() {
   const { isAuthenticated, isLoading } = useRequireAuth();
   const navigate = useNavigate();

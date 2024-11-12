@@ -12,7 +12,7 @@ import { Coupon } from "@/types/coupon";
 import { CouponForm } from "@/components/forms/coupon";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useExport } from "@/hooks/useExport";
-import { useAuth } from "@/services/auth";
+import { useAuth } from "@/hooks/useAuth";
 
 export function CouponsPage() {
   const [search, setSearch] = useState("");
