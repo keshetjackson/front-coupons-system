@@ -2,8 +2,7 @@ import { withDelay } from "@/lib/reactQuery";
 import { ApiResponse } from "@/types/api";
 import { Coupon, CouponInput, CouponApplicationResult, ValidationResult } from "@/types/coupon";
 
-const API_URL = import.meta.env.API_URL || 'http://localhost:3001';
-
+const API_URL = import.meta.env.API_URL
 export const couponService = {
   getAll: (): Promise<ApiResponse<Coupon[]>> => 
     withDelay(
