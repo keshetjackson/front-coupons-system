@@ -21,5 +21,31 @@ export interface Coupon {
     expiryDate?: string;
     allowStacking: boolean;
     usageLimit?: number;
-    createdBy: string;
+    currentUsage?: number;  // Added this to CouponInput
+    isActive: boolean;
+    createdBy?: string;
+  }
+
+  export interface ValidationResult {
+    isValid: boolean;
+    error?: string;
+    appliedCoupons?: Coupon[];
+    discountAmount?: number;
+    finalAmount?: number;
+  }
+  
+  export interface CouponApplicationResult {
+    appliedCoupons: Coupon[];
+    discountAmount: number;
+    finalAmount: number;
+  }
+  
+  export interface CouponEntry {
+    code: string;
+    isValid: boolean;
+  }
+  
+  export interface DiscountInfo {
+    amount: number;
+    final: number;
   }

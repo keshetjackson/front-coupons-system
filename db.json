@@ -1,168 +1,279 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "isAdmin": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "username": "manager",
+      "password": "manager123",
+      "isAdmin": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "coupons": [
+    {
+      "id": "1",
+      "code": "WELCOME10",
+      "description": "Welcome discount for new customers",
+      "discountType": "percentage",
+      "discountValue": 10,
+      "expiryDate": "2024-12-31T23:59:59.999Z",
+      "allowStacking": false,
+      "usageLimit": 1000,
+      "createdBy": "1",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "2",
+      "code": "FIXED20",
+      "description": "20₪ off any purchase",
+      "discountType": "fixed",
+      "discountValue": 20,
+      "expiryDate": null,
+      "allowStacking": true,
+      "usageLimit": null,
+      "createdBy": "1",
+      "createdAt": "2024-12-15T00:00:00.000Z",
+      "isActive": true,
+      "currentUsage": 3
+    },
+    {
+      "id": "3",
+      "code": "SUMMER30",
+      "description": "Summer sale discount",
+      "discountType": "percentage",
+      "discountValue": 30,
+      "expiryDate": "2024-12-31T23:59:59.999Z",
+      "allowStacking": true,
+      "usageLimit": 500,
+      "currentUsage": 3,
+      "createdBy": "2",
+      "createdAt": "2024-03-01T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "4",
+      "code": "SPECIAL50",
+      "description": "VIP customer special discount",
+      "discountType": "fixed",
+      "discountValue": 50,
+      "expiryDate": "2024-06-30T23:59:59.999Z",
+      "allowStacking": false,
+      "usageLimit": 100,
+      "currentUsage": 100,
+      "createdBy": "1",
+      "createdAt": "2024-02-01T00:00:00.000Z",
+      "isActive": false
+    },
+    {
+      "id": "5",
+      "code": "FLASH25",
+      "description": "Flash sale discount",
+      "discountType": "percentage",
+      "discountValue": 25,
+      "expiryDate": "2024-03-01T23:59:59.999Z",
+      "allowStacking": true,
+      "usageLimit": 200,
+      "currentUsage": 198,
+      "createdBy": "2",
+      "createdAt": "2024-02-15T00:00:00.000Z",
+      "isActive": true
+    }
+  ],
+  "coupon_usage": [
+    {
+      "id": "1",
+      "couponId": "1",
+      "usedAt": "2024-03-01T10:00:00.000Z",
+      "orderAmount": 150,
+      "discountAmount": 15,
+      "finalAmount": 135
+    },
+    {
+      "id": "2",
+      "couponId": "2",
+      "usedAt": "2024-03-01T11:30:00.000Z",
+      "orderAmount": 80,
+      "discountAmount": 20,
+      "finalAmount": 60
+    },
+    {
+      "id": "3",
+      "couponId": "1",
+      "usedAt": "2024-03-02T09:15:00.000Z",
+      "orderAmount": 200,
+      "discountAmount": 20,
+      "finalAmount": 180
+    },
+    {
+      "id": "4",
+      "couponId": "4",
+      "usedAt": "2024-03-02T14:20:00.000Z",
+      "orderAmount": 300,
+      "discountAmount": 50,
+      "finalAmount": 250
+    },
+    {
+      "id": "5",
+      "couponId": "5",
+      "usedAt": "2024-03-03T16:45:00.000Z",
+      "orderAmount": 400,
+      "discountAmount": 100,
+      "finalAmount": 300
+    },
+    {
+      "id": "fe7a",
+      "couponId": "1",
+      "usedAt": "2024-11-12T20:42:22.250Z",
+      "orderAmount": 100,
+      "discountAmount": 10,
+      "finalAmount": 90
+    },
+    {
+      "id": "8b6e",
+      "couponId": "2",
+      "usedAt": "2024-11-12T20:46:20.051Z",
+      "orderAmount": 100,
+      "discountAmount": 20,
+      "finalAmount": 80
+    },
+    {
+      "id": "f53c",
+      "couponId": "1",
+      "usedAt": "2024-11-12T20:47:30.639Z",
+      "orderAmount": 100,
+      "discountAmount": 10,
+      "finalAmount": 90
+    },
+    {
+      "id": "1aa8",
+      "couponId": "1",
+      "usedAt": "2024-11-12T20:47:38.051Z",
+      "orderAmount": 100,
+      "discountAmount": 10,
+      "finalAmount": 90
+    },
+    {
+      "id": "fbb3",
+      "couponId": "1",
+      "usedAt": "2024-11-12T20:47:44.190Z",
+      "orderAmount": 100,
+      "discountAmount": 10,
+      "finalAmount": 90
+    },
+    {
+      "id": "a1a4",
+      "couponId": "2",
+      "usedAt": "2024-11-12T20:48:09.991Z",
+      "orderAmount": 100,
+      "discountAmount": 20,
+      "finalAmount": 80
+    },
+    {
+      "id": "2c98",
+      "couponId": "3",
+      "usedAt": "2024-11-12T20:48:31.632Z",
+      "orderAmount": 100,
+      "discountAmount": 30,
+      "finalAmount": 70
+    },
+    {
+      "id": "ea6e",
+      "couponId": "3",
+      "usedAt": "2024-11-12T20:48:57.776Z",
+      "orderAmount": 100,
+      "discountAmount": 30,
+      "finalAmount": 70
+    },
+    {
+      "id": "a9ee",
+      "couponId": "2",
+      "usedAt": "2024-11-12T20:49:01.122Z",
+      "orderAmount": 100,
+      "discountAmount": 20,
+      "finalAmount": 80
+    },
+    {
+      "id": "a3c0",
+      "couponId": "2",
+      "usedAt": "2024-11-12T20:49:43.506Z",
+      "orderAmount": 100,
+      "discountAmount": 20,
+      "finalAmount": 80
+    },
+    {
+      "id": "71ef",
+      "couponId": "2",
+      "usedAt": "2024-11-12T20:51:54.448Z",
+      "orderAmount": 100,
+      "discountAmount": 20,
+      "finalAmount": 80
+    },
+    {
+      "id": "025c",
+      "couponId": "3",
+      "usedAt": "2024-11-12T20:52:07.656Z",
+      "orderAmount": 100,
+      "discountAmount": 30,
+      "finalAmount": 70
+    },
+    {
+      "id": "e24a",
+      "couponId": "3",
+      "usedAt": "2024-11-12T20:53:18.833Z",
+      "orderAmount": 100,
+      "discountAmount": 50,
+      "finalAmount": 50
+    },
+    {
+      "id": "0445",
+      "couponId": "2",
+      "usedAt": "2024-11-12T20:53:18.833Z",
+      "orderAmount": 100,
+      "discountAmount": 50,
+      "finalAmount": 50
+    }
+  ],
+  "reports": {
+    "daily_usage": [
       {
         "id": "1",
-        "username": "admin",
-        "password": "admin123",
-        "isAdmin": true,
-        "createdAt": "2024-01-01T00:00:00.000Z"
+        "date": "2024-03-01",
+        "totalOrders": 25,
+        "totalDiscount": 450,
+        "averageDiscount": 18
       },
       {
         "id": "2",
-        "username": "manager",
-        "password": "manager123",
-        "isAdmin": true,
-        "createdAt": "2024-01-01T00:00:00.000Z"
+        "date": "2024-03-02",
+        "totalOrders": 30,
+        "totalDiscount": 600,
+        "averageDiscount": 20
       }
     ],
-    "coupons": [
-      {
-        "id": "1",
-        "code": "WELCOME10",
-        "description": "Welcome discount for new customers",
-        "discountType": "percentage",
-        "discountValue": 10,
-        "expiryDate": "2024-12-31T23:59:59.999Z",
-        "allowStacking": false,
-        "usageLimit": 1000,
-        "currentUsage": 45,
-        "createdBy": "1",
-        "createdAt": "2024-01-01T00:00:00.000Z",
-        "isActive": true
-      },
-      {
-        "id": "2",
-        "code": "FIXED20",
-        "description": "20₪ off any purchase",
-        "discountType": "fixed",
-        "discountValue": 20,
-        "expiryDate": null,
-        "allowStacking": true,
-        "usageLimit": null,
-        "currentUsage": 150,
-        "createdBy": "1",
-        "createdAt": "2024-01-15T00:00:00.000Z",
-        "isActive": true
-      },
-      {
-        "id": "3",
-        "code": "SUMMER30",
-        "description": "Summer sale discount",
-        "discountType": "percentage",
-        "discountValue": 30,
-        "expiryDate": "2024-08-31T23:59:59.999Z",
-        "allowStacking": false,
-        "usageLimit": 500,
-        "currentUsage": 0,
-        "createdBy": "2",
-        "createdAt": "2024-03-01T00:00:00.000Z",
-        "isActive": true
-      },
-      {
-        "id": "4",
-        "code": "SPECIAL50",
-        "description": "VIP customer special discount",
-        "discountType": "fixed",
-        "discountValue": 50,
-        "expiryDate": "2024-06-30T23:59:59.999Z",
-        "allowStacking": false,
-        "usageLimit": 100,
-        "currentUsage": 100,
-        "createdBy": "1",
-        "createdAt": "2024-02-01T00:00:00.000Z",
-        "isActive": false
-      },
-      {
-        "id": "5",
-        "code": "FLASH25",
-        "description": "Flash sale discount",
-        "discountType": "percentage",
-        "discountValue": 25,
-        "expiryDate": "2024-03-01T23:59:59.999Z",
-        "allowStacking": true,
-        "usageLimit": 200,
-        "currentUsage": 198,
-        "createdBy": "2",
-        "createdAt": "2024-02-15T00:00:00.000Z",
-        "isActive": true
-      }
-    ],
-    "coupon_usage": [
+    "coupon_analytics": [
       {
         "id": "1",
         "couponId": "1",
-        "usedAt": "2024-03-01T10:00:00.000Z",
-        "orderAmount": 150.00,
-        "discountAmount": 15.00,
-        "finalAmount": 135.00
+        "totalUsage": 45,
+        "totalDiscount": 675,
+        "averageOrderValue": 150,
+        "conversionRate": 0.85
       },
       {
         "id": "2",
         "couponId": "2",
-        "usedAt": "2024-03-01T11:30:00.000Z",
-        "orderAmount": 80.00,
-        "discountAmount": 20.00,
-        "finalAmount": 60.00
-      },
-      {
-        "id": "3",
-        "couponId": "1",
-        "usedAt": "2024-03-02T09:15:00.000Z",
-        "orderAmount": 200.00,
-        "discountAmount": 20.00,
-        "finalAmount": 180.00
-      },
-      {
-        "id": "4",
-        "couponId": "4",
-        "usedAt": "2024-03-02T14:20:00.000Z",
-        "orderAmount": 300.00,
-        "discountAmount": 50.00,
-        "finalAmount": 250.00
-      },
-      {
-        "id": "5",
-        "couponId": "5",
-        "usedAt": "2024-03-03T16:45:00.000Z",
-        "orderAmount": 400.00,
-        "discountAmount": 100.00,
-        "finalAmount": 300.00
+        "totalUsage": 150,
+        "totalDiscount": 3000,
+        "averageOrderValue": 200,
+        "conversionRate": 0.92
       }
-    ],
-    "reports": {
-      "daily_usage": [
-        {
-          "id": "1",
-          "date": "2024-03-01",
-          "totalOrders": 25,
-          "totalDiscount": 450.00,
-          "averageDiscount": 18.00
-        },
-        {
-          "id": "2",
-          "date": "2024-03-02",
-          "totalOrders": 30,
-          "totalDiscount": 600.00,
-          "averageDiscount": 20.00
-        }
-      ],
-      "coupon_analytics": [
-        {
-          "id": "1",
-          "couponId": "1",
-          "totalUsage": 45,
-          "totalDiscount": 675.00,
-          "averageOrderValue": 150.00,
-          "conversionRate": 0.85
-        },
-        {
-          "id": "2",
-          "couponId": "2",
-          "totalUsage": 150,
-          "totalDiscount": 3000.00,
-          "averageOrderValue": 200.00,
-          "conversionRate": 0.92
-        }
-      ]
-    }
+    ]
   }
+}

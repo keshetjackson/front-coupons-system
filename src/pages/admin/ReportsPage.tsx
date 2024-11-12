@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { Download, Search } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useReports } from '@/hooks/reports/useReports';
 import { useUsers } from '@/hooks/useUsers';
 import { User } from '@/types/user';
@@ -23,8 +20,7 @@ export function ReportsPage() {
   
   const { users } = useUsers();
   const { coupons } = useReports();
-  const { exportCoupons } = useExport()
-
+  const { exportCoupons } = useExport();
   
   const filteredCoupons = coupons.data?.filter((coupon: Coupon) => {
     const matchesUser = selectedUser === 'all' || coupon.createdBy === selectedUser;
@@ -41,14 +37,14 @@ export function ReportsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 lg:flex-row justify-between items-start">
+      <div className="flex flex-col gap-4 lg:flex-row justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold">Reports</h1>
           <p className="text-muted-foreground mt-1">
             View and analyze coupon usage
           </p>
         </div>
-        <Button onClick={() => exportCoupons.mutateAsync()} >
+        <Button onClick={() => exportCoupons.mutateAsync()}>
           <Download className="w-4 h-4 mr-2" />
           Export to Excel
         </Button>
@@ -63,10 +59,7 @@ export function ReportsPage() {
             <div className="lg:grid grid-cols-4 gap-4">
               <div>
                 <Label htmlFor="user-select">Creator</Label>
-                <Select 
-                  value={selectedUser} 
-                  onValueChange={setSelectedUser}
-                >
+                <Select value={selectedUser} onValueChange={setSelectedUser}>
                   <SelectTrigger id="user-select">
                     <SelectValue placeholder="Select creator" />
                   </SelectTrigger>
@@ -116,50 +109,56 @@ export function ReportsPage() {
               </div>
             </div>
 
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Code</TableHead>
-                  <TableHead>Created By</TableHead>
-                  <TableHead>Created At</TableHead>
-                  <TableHead>Usage Count</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Value</TableHead>
-                  <TableHead>Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredCoupons.map((coupon: Coupon) => (
-                  <TableRow key={coupon.id}>
-                    <TableCell className="font-medium">
-                      {coupon.code}
-                    </TableCell>
-                    <TableCell>
-                      {users.data?.find((u: User) => u.id === coupon.createdBy)?.username ?? coupon.createdBy}
-                    </TableCell>
-                    <TableCell>
-                      {new Date(coupon.createdAt).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>{coupon.currentUsage}</TableCell>
-                    <TableCell>{coupon.discountType}</TableCell>
-                    <TableCell>
-                      {coupon.discountType === 'percentage' 
-                        ? `${coupon.discountValue}%` 
-                        : `₪${coupon.discountValue}`}
-                    </TableCell>
-                    <TableCell>
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        coupon.isActive 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
-                        {coupon.isActive ? 'Active' : 'Inactive'}
-                      </span>
-                    </TableCell>
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50">
+                    <TableHead className="text-center">Code</TableHead>
+                    <TableHead className="text-center">Created By</TableHead>
+                    <TableHead className="text-center">Created At</TableHead>
+                    <TableHead className="text-center">Usage Count</TableHead>
+                    <TableHead className="text-center">Type</TableHead>
+                    <TableHead className="text-center">Value</TableHead>
+                    <TableHead className="text-center">Status</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {filteredCoupons.map((coupon: Coupon) => (
+                    <TableRow key={coupon.id}>
+                      <TableCell className="text-center font-medium">
+                        {coupon.code}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {users.data?.find((u: User) => u.id === coupon.createdBy)?.username ?? coupon.createdBy}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {new Date(coupon.createdAt).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {coupon.currentUsage}
+                      </TableCell>
+                      <TableCell className="text-center capitalize">
+                        {coupon.discountType}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {coupon.discountType === 'percentage' 
+                          ? `${coupon.discountValue}%` 
+                          : `₪${coupon.discountValue}`}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <span className={`px-2.5 py-1.5 rounded-full text-xs font-medium ${
+                          coupon.isActive 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-red-100 text-red-800'
+                        }`}>
+                          {coupon.isActive ? 'Active' : 'Inactive'}
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </CardContent>
       </Card>

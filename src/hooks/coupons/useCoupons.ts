@@ -6,7 +6,6 @@ import { queryClient } from '@/lib/reactQuery';
 export function useCoupons() {
 
   return {
-    // Queries
     coupons: useSuspenseQuery <Coupon[]>({
       queryKey: ['coupons'],
       queryFn: async () => {
@@ -15,7 +14,6 @@ export function useCoupons() {
       },
     }),
 
-    // Mutations
     createCoupon: useMutation({
       mutationFn: async (data: CouponInput) => {
         console.log('creating coupon', data);

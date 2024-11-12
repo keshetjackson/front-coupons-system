@@ -4,7 +4,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 export function useAuth() {
     const queryClient = useQueryClient();
   
-    // Change from useSuspenseQuery to useQuery
     const { data: currentUser, isLoading } = useQuery({
       queryKey: ['auth', 'user'],
       queryFn: async () => {

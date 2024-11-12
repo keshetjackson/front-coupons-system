@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { PlusCircle, Search, UserCog, Trash2, AlertCircle } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription,
-} from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
-} from "@/components/ui/dialog";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table";
-import { Alert, AlertDescription, AlertTitle,
-} from "@/components/ui/alert";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUsers } from '@/hooks/useUsers';
@@ -62,7 +58,7 @@ export const UsersPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 lg:flex-row justify-between items-start ">
+      <div className="flex flex-col gap-4 lg:flex-row justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold">Users Management</h1>
           <p className="text-muted-foreground mt-1">
@@ -99,7 +95,7 @@ export const UsersPage = () => {
         </CardHeader>
         <CardContent>
           <div className="mb-4">
-            <div className="relative">
+            <div className="relative max-w-md">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search users..."
@@ -110,54 +106,56 @@ export const UsersPage = () => {
             </div>
           </div>
 
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Username</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredUsers.map((user: User) => (
-                <TableRow key={user.id}>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center gap-2">
-                      <UserCog className="h-4 w-4" />
-                      {user.username}
-                      {user.id === currentUser?.id && (
-                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
-                          You
-                        </span>
-                      )}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    {new Date(user.createdAt).toLocaleDateString()}
-                  </TableCell>
-                  <TableCell>
-                    <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
-                      Active
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleDeleteUser(user.id)}
-                      disabled={user.id === currentUser?.id || deleteUser.isPending}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </TableCell>
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead className="text-center">Username</TableHead>
+                  <TableHead className="text-center">Created At</TableHead>
+                  <TableHead className="text-center">Status</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {filteredUsers.map((user: User) => (
+                  <TableRow key={user.id}>
+                    <TableCell className="text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <UserCog className="h-4 w-4" />
+                        {user.username}
+                        {user.id === currentUser?.id && (
+                          <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
+                            You
+                          </span>
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-center">
+                      {new Date(user.createdAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <span className="px-2.5 py-1.5 rounded-full text-xs bg-green-100 text-green-800">
+                        Active
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleDeleteUser(user.id)}
+                        disabled={user.id === currentUser?.id || deleteUser.isPending}
+                        className="hover:bg-red-100 hover:text-red-600"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>
   );
 };
-
