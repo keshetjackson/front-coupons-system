@@ -3,7 +3,7 @@ import { Coupon } from '@/types/coupon';
 import { useMutation } from '@tanstack/react-query';
 import * as Excel from 'exceljs';
 
-const API_URL = import.meta.env.API_URL
+const API_URL = import.meta.env.API_URL || "http://localhost:3001"
 const downloadFile = (blob: Blob, filename: string) => {
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');

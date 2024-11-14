@@ -1,8 +1,8 @@
 import { withDelay } from "@/lib/reactQuery";
 import { ApiResponse } from "@/types/api";
 import { Coupon, CouponInput, CouponApplicationResult, ValidationResult } from "@/types/coupon";
+import {API_URL} from '../../config/apirRoute'
 
-const API_URL = import.meta.env.API_URL
 export const couponService = {
   getAll: (): Promise<ApiResponse<Coupon[]>> => 
     withDelay(

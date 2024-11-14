@@ -1,7 +1,7 @@
 import { withDelay } from '@/lib/reactQuery';
 import { UserInput } from '@/types/user';
+import {API_URL} from '../../config/apirRoute'
 
-const API_URL = 'http://localhost:3001';
 
 
 

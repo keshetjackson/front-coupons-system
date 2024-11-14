@@ -1,8 +1,8 @@
 import { withDelay } from "@/lib/reactQuery";
 import { LoginInput } from "@/types/auth";
 import { User } from "@/types/user";
+import {API_URL} from '../../config/apirRoute'
 
-const API_URL = import.meta.env.API_URL
 
 export const authService = {
     login: async (credentials: LoginInput) => 

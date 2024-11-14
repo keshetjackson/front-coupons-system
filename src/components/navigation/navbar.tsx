@@ -18,7 +18,6 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Dashboard', href: '/admin', adminOnly: true },
   { label: 'Manage Coupons', href: '/admin/coupons', adminOnly: true },
   { label: 'Reports', href: '/admin/reports', adminOnly: true },
   { label: 'Users', href: '/admin/users', adminOnly: true },

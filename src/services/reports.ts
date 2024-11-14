@@ -1,7 +1,7 @@
 import { withDelay } from "@/lib/reactQuery";
 import {  CouponUsage } from "@/types/report";
+import {API_URL} from '../../config/apirRoute'
 
-const API_URL = import.meta.env.API_URL
 export const reportService = {
   getCouponUsage: async (couponId: string) =>
     withDelay(
