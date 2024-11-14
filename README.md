@@ -1,3 +1,8 @@
+to run : 
+1. clone 
+2. nom install
+3. npm run dev
+
 # Coupon System
 
 A frontend application for managing a coupon system, built as per assignment requirements.
