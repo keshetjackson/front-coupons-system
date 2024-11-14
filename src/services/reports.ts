@@ -1,8 +1,7 @@
 import { withDelay } from "@/lib/reactQuery";
 import {  CouponUsage } from "@/types/report";
 
-const API_URL = import.meta.env.API_URL || 'http://localhost:3001';
-
+const API_URL = import.meta.env.API_URL
 export const reportService = {
   getCouponUsage: async (couponId: string) =>
     withDelay(

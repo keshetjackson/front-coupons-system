@@ -2,8 +2,7 @@ import { withDelay } from "@/lib/reactQuery";
 import { LoginInput } from "@/types/auth";
 import { User } from "@/types/user";
 
-const API_URL = import.meta.env.API_URL || 'http://localhost:3001';
-
+const API_URL = import.meta.env.API_URL
 
 export const authService = {
     login: async (credentials: LoginInput) => 
